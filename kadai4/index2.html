@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>my Memo's Pad</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<style>
+li{text-align: center;}
+.tab{overflow:hidden;}
+.tab li{background:#ccc; padding:5px 25px; float:left; margin-right:1px;}
+.tab li.select{background:#eee;}
+.content li{background:#eee; padding:20px;}
+.hide {display:none;}
+</style>
+</head>
+
+<body>
+    <!-- <img src="img/headerimg.jpeg" alt="headerimg"> -->
+    <header>
+        <h1>第一印象ゲーム</h1>
+        <p>第一印象ゲームとは合コンで100％盛り上がるゲームである。<br>
+            ルールは簡単。<br>男性陣女性陣で異性の名前を「A」「B」「C」「D」で表現しよう。</p>
+        <p class="alert"> その時異性陣には名前は内緒だ。</p>
+    </header>
+
+    <main>
+        <div class="men">
+        <h2>男性陣入力用</h2>
+            <ul class="quesion">
+                <li>質問</li>
+                <li>
+                    <input type="radio" name=question id="q1"><label for="q1">Q1.好みのタイプは？</label>
+                    <input type="radio" name=question id="q2"><label for="q2">Q2.弟/妹にするなら？</label><br>
+                    <input type="radio" name=question id="q3"><label for="q3">Q3.彼氏/彼女にするなら？</label>
+                    <input type="radio" name=question id="q4"><label for="q4">Q4.結婚するなら？</label><br>
+                    <input type="radio" name=question id="q5"><labe; for="q5">Q5.この後飲みに行くなら？</labe;>
+                    <input type="radio" name=question id="q6"><labe; for="q6">Q6.一晩過ごすなら？</labe;>
+                </li>
+            </ul>
+            <ul class="name">
+                <li>名前</li>
+                <li><input type="text" id="key1"></li>
+                <li><input type="text" id="key2"></li>
+                <li><input type="text" ></li>
+                <li><input type="text" ></li>
+                <li><input type="text" ></li>
+            </ul>
+            <ul class="answer">
+                <li>Answer</li>
+                <li><input type="text" id="memo1"></li>
+                <li><input type="text" id="memo2"></li>
+                <li><input type="text" ></li>
+                <li><input type="text" ></li>
+                <li><input type="text" ></li>
+            </ul>
+        </div>
+        <ul>
+            <li id="save">回答する</li>
+            <li id="clear">消す</li><p></p>
+        </ul>
+    </main>
+
+<table id="list">
+    <!-- ここに追加データが挿入される -->
+</table>
+
+<script>
+    //1.Save クリックイベント
+
+$("#save").on("click",function(){
+    const key = $("#key1 , #key2").val();
+    const value = $("#memo1 , #memo2").val();
+    localStorage.setItem(key,value);
+    const html = '<tr><th>'+key+'</th><td>'+value+'</td></tr>';
+    $("#list").append(html);
+});
+
+//2.clear クリックイベント
+$("#clear").on("click",function(){
+    localStorage.clear();
+    $("#list").empty();
+});
+
+//3.ページ読み込み：保存データ取得表示
+for(let i=0; i<localStorage.length; i++){
+    const key   = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    const html = '<tr><th>'+key+'</th><td>'+value+'</td></tr>';
+    $("#list").append(html);
+}
+
+
+
+// $(function() {
+//     //参考URL:http://blog.three-co.jp/web/558/
+//     //クリックしたときのファンクションをまとめて指定
+//     $('.tab li').click(function() {
+//         //.index()を使いクリックされたタブが何番目かを調べ、
+//         //indexという変数に代入します。
+//         var index = $('.tab li').index(this);
+//         //コンテンツを一度すべて非表示にし、
+//         $('.content li').css('display','none');
+//         //クリックされたタブと同じ順番のコンテンツを表示します。
+//         $('.content li').eq(index).css('display','block');
+//         //一度タブについているクラスselectを消し、
+//         $('.tab li').removeClass('select');
+//         //クリックされたタブのみにクラスselectをつけます。
+//         $(this).addClass('select');
+//     });
+// });
+
+
+//1.Save クリックイベント
+
+
+
+
+//2.ロード時に表示
+
+
+
+
+
+</script>
+<footer><small>G's</small></footer>
+
+</body>
+
+</html>
